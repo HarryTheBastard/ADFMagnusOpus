@@ -1,0 +1,32 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Workbench 2.1-ish palette -->
+    <Color x:Key="WB.BlueTitle">#6688BB</Color>
+    <Color x:Key="WB.BlueTitleDark">#00146C</Color>
+    <Color x:Key="WB.WindowGray">#AAAAAA</Color>
+    <Color x:Key="WB.DarkGray">#474747</Color>
+    <Color x:Key="WB.LightGray">#CECECE</Color>
+    <Color x:Key="WB.White">#FFFFFF</Color>
+    <Color x:Key="WB.Black">#000000</Color>
+
+    <SolidColorBrush x:Key="WB.Brush.BlueTitle" Color="{StaticResource WB.BlueTitle}"/>
+    <SolidColorBrush x:Key="WB.Brush.BlueTitleDark" Color="{StaticResource WB.BlueTitleDark}"/>
+    <SolidColorBrush x:Key="WB.Brush.WindowGray" Color="{StaticResource WB.WindowGray}"/>
+    <SolidColorBrush x:Key="WB.Brush.DarkGray" Color="{StaticResource WB.DarkGray}"/>
+    <SolidColorBrush x:Key="WB.Brush.LightGray" Color="{StaticResource WB.LightGray}"/>
+    <SolidColorBrush x:Key="WB.Brush.White" Color="{StaticResource WB.White}"/>
+    <SolidColorBrush x:Key="WB.Brush.Black" Color="{StaticResource WB.Black}"/>
+
+    <!-- Typography: swap font family to your Topaz TTF if you have it -->
+    <FontFamily x:Key="WB.FontFamily">Segoe UI</FontFamily>
+    <sys:Double x:Key="WB.FontSize">12</sys:Double>
+
+    <!-- Standard thicknesses -->
+    <Thickness x:Key="WB.OuterBorderThickness">2</Thickness>
+    <Thickness x:Key="WB.GadgetBevel">1</Thickness>
+
+    <sys:Boolean x:Key="WB.UseDitheredTitle">False</sys:Boolean>
+
+</ResourceDictionary>

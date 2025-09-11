@@ -1,0 +1,63 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="WB.Button" TargetType="Button">
+        <Setter Property="FontFamily" Value="{StaticResource WB.FontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource WB.FontSize}"/>
+        <Setter Property="Foreground" Value="{StaticResource WB.Brush.Black}"/>
+        <Setter Property="Background" Value="{StaticResource WB.Brush.LightGray}"/>
+        <Setter Property="Padding" Value="8,4"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
+                        <Grid>
+                            <Border BorderThickness="1" BorderBrush="{StaticResource WB.Brush.White}"/>
+                            <Border BorderThickness="0,0,1,1" BorderBrush="{StaticResource WB.Brush.DarkGray}"/>
+                            <ContentPresenter x:Name="PART_ContentPresenter"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                RecognizesAccessKey="True"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{StaticResource WB.Brush.WindowGray}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource WB.Brush.DarkGray}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="WB.TextBox" TargetType="TextBox">
+        <Setter Property="FontFamily" Value="{StaticResource WB.FontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource WB.FontSize}"/>
+        <Setter Property="Background" Value="{StaticResource WB.Brush.White}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource WB.Brush.DarkGray}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="4,2"/>
+    </Style>
+
+    <Style x:Key="WB.Menu" TargetType="Menu">
+        <Setter Property="Background" Value="{StaticResource WB.Brush.WindowGray}"/>
+        <Setter Property="Foreground" Value="{StaticResource WB.Brush.Black}"/>
+        <Setter Property="FontFamily" Value="{StaticResource WB.FontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource WB.FontSize}"/>
+    </Style>
+
+    <Style x:Key="WB.MenuItem" TargetType="MenuItem">
+        <Setter Property="Background" Value="{StaticResource WB.Brush.WindowGray}"/>
+        <Setter Property="Foreground" Value="{StaticResource WB.Brush.Black}"/>
+        <Setter Property="Padding" Value="8,2"/>
+    </Style>
+
+    <!-- Implicit styles -->
+    <Style TargetType="Button"   BasedOn="{StaticResource WB.Button}" />
+    <Style TargetType="TextBox"  BasedOn="{StaticResource WB.TextBox}" />
+    <Style TargetType="Menu"     BasedOn="{StaticResource WB.Menu}" />
+    <Style TargetType="MenuItem" BasedOn="{StaticResource WB.MenuItem}" />
+</ResourceDictionary>
+    
