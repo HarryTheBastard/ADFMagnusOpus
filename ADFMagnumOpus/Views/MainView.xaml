@@ -7,12 +7,12 @@
             <Border BorderBrush="{StaticResource WB.Brush.White}" BorderThickness="2">
                 <Border BorderBrush="{StaticResource WB.Brush.DarkGray}" BorderThickness="0,0,2,2" Padding="6">
                     <StackPanel>
-                        <TextBlock Text="Images" FontWeight="Bold"/>
+                        <TextBlock Text="Images" FontWeight="Bold" FontSize="18" />
                         <ListBox Height="220" Margin="0,6,0,6">
                             <ListBoxItem>Workbench.adf</ListBoxItem>
                             <ListBoxItem>Games1.dms</ListBoxItem>
                         </ListBox>
-                        <Button Content="Add…"/>
+                        <Button Content="Add…" />
                     </StackPanel>
                 </Border>
             </Border>

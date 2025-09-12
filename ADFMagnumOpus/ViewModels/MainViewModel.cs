@@ -1,6 +1,17 @@
+using ADFMagnumOpus.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace ADFMagnumOpus.ViewModels;
 
-public class MainViewModel
+public class MainViewModel : ObservableObject
 {
-    public string AppTitle => "ADFMagnumOpus — Amiga Disk Utility";
+    private readonly MainView _window;
+    public MainViewModel(MainView window)
+    {
+        _window = window;
+
+    }
+
+    
+    
 }

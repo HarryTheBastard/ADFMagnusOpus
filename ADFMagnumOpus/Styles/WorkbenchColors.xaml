@@ -20,7 +20,7 @@
     <SolidColorBrush x:Key="WB.Brush.Black" Color="{StaticResource WB.Black}"/>
 
     <!-- Typography: swap font family to your Topaz TTF if you have it -->
-    <FontFamily x:Key="WB.FontFamily">Segoe UI</FontFamily>
+    <FontFamily x:Key="WB.AmigaTopaz">pack://application:,,,/Fonts/#Amiga Topaz Regular</FontFamily>
     <sys:Double x:Key="WB.FontSize">12</sys:Double>
 
     <!-- Standard thicknesses -->

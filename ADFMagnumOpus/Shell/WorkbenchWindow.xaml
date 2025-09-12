@@ -1,13 +1,18 @@
 ﻿<Window x:Class="ADFMagnumOpus.Shell.WorkbenchWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        xmlns:vm="clr-namespace:ADFMagnumOpus.ViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=vm:WorkbenchWindowViewModel, IsDesignTimeCreatable=True}"
         WindowStyle="None"
+        AllowsTransparency="True"
         ResizeMode="CanResize"
-        AllowsTransparency="False"
         Background="{StaticResource WB.Brush.WindowGray}"
         SnapsToDevicePixels="True"
-        Title="Workbench Window"
+        Title="{Binding AppTitle}"
         Width="1000" Height="650">
 
     <!-- WindowChrome: the correct attached property usage -->
@@ -40,7 +45,7 @@
                 <Border Grid.Column="1" Background="{StaticResource WB.Brush.BlueTitle}">
                     <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Title}"
                      VerticalAlignment="Center" Margin="6,0,0,0"
-                     Foreground="White" FontFamily="{StaticResource WB.FontFamily}"
+                     Foreground="White" FontFamily="{StaticResource WB.AmigaTopaz}"
                      FontSize="13" FontWeight="Bold"/>
                 </Border>
 

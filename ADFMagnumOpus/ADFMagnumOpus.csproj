@@ -9,4 +9,16 @@
 	<ApplicationIcon>Assets\appicon.ico</ApplicationIcon>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Fonts\amiga-topaz.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Fonts\amiga-topaz.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+  </ItemGroup>
+
 </Project>
