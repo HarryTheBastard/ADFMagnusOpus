@@ -1,4 +1,5 @@
 using ADFMagnumOpus.ViewModels;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 namespace ADFMagnumOpus.Shell
@@ -8,9 +9,11 @@ namespace ADFMagnumOpus.Shell
         public WorkbenchWindow()
         {
             InitializeComponent();
-
-            this.DataContext = new WorkbenchWindowViewModel(this);
-
+            // Only assign runtime VM when NOT in design mode
+            if (!DesignerProperties.GetIsInDesignMode(this))
+            {
+                this.DataContext = new WorkbenchWindowViewModel(this);
+            }
         }
 
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -21,7 +24,10 @@ namespace ADFMagnumOpus.Shell
 
         private void Minimize_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
         private void MaximizeRestore_Click(object sender, RoutedEventArgs e) => ToggleMaxRestore();
-        private void Close_Click(object sender, RoutedEventArgs e) => Close();
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         private void ToggleMaxRestore() =>
             WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;

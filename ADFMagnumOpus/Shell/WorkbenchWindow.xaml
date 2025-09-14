@@ -5,94 +5,139 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
         xmlns:vm="clr-namespace:ADFMagnumOpus.ViewModels"
+        xmlns:local="clr-namespace:ADFMagnumOpus.Shell"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=vm:WorkbenchWindowViewModel, IsDesignTimeCreatable=True}"
         WindowStyle="None"
         AllowsTransparency="True"
         ResizeMode="CanResize"
         Background="{StaticResource WB.Brush.WindowGray}"
+        WindowStartupLocation="CenterScreen"
         SnapsToDevicePixels="True"
+        x:Name="AppWindow"
         Title="{Binding AppTitle}"
         Width="1000" Height="650">
 
+    <Window.Resources>
+        <Style TargetType="{x:Type local:WorkbenchWindow}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <Grid Background="{StaticResource WB.Brush.WindowGray}">
+                            <!-- Window Border -->
+                            <Border BorderThickness="2" />
+
+                            <!-- Main Window content -->
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <!-- Title Bar -->
+                                    <RowDefinition Height="{Binding TitleHeightGridLength, FallbackValue=42}" />
+                                    <!-- Window Content -->
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <!-- Title Bar -->
+                                <Grid Grid.Row="0"
+                                      Background="{StaticResource WB.Brush.BlueTitle}"
+                                      Panel.ZIndex="1">
+
+                                    <Grid.ColumnDefinitions>
+                                        <!-- Close -->
+                                        <ColumnDefinition Width="Auto" />
+
+                                        <!-- Title -->
+                                        <ColumnDefinition Width="*" />
+
+                                        <!-- Minimize -->
+                                        <ColumnDefinition Width="Auto" />
+
+                                        <!-- Maximize -->
+                                        <ColumnDefinition Width="Auto" />
+                                        
+                                        <!-- Toggle Front Back -->
+                                        <ColumnDefinition Width="Auto" />
+
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Close button  -->
+                                    <Button Grid.Column="0"
+                                            Command="{Binding DataContext.CloseCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Style="{StaticResource TitlebarCloseButton}"
+                                            shell:WindowChrome.IsHitTestVisibleInChrome="True">
+                                        <TextBlock Foreground="White"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center" />
+                                    </Button>
+
+                                    <!-- 1) White top/left edge (underlay) -->
+                                    <Border Grid.Column="1"
+                                            BorderBrush="{StaticResource WB.Brush.White}"
+                                            BorderThickness="2,2,0,0"
+                                            Panel.ZIndex="1"/>
+
+                                    <!-- 2) Black bottom edge (overlay so bottom-left becomes black) -->
+                                    <Border Grid.Column="1"
+                                            BorderBrush="{StaticResource WB.Brush.Black}"
+                                            BorderThickness="0,0,2,2"
+                                            Panel.ZIndex="2" />
+
+                                    <Viewbox Grid.Column="1" Margin="0" Stretch="Uniform">
+                                        <TextBlock Style="{StaticResource HeaderText}" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Title}" />
+                                    </Viewbox>
+
+
+                                    <!-- Gadget buttons  -->
+                                    <Button Grid.Column="2"
+                                            Command="{Binding DataContext.MinimizeCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Style="{StaticResource TitlebarMinimizeButton}"
+                                            shell:WindowChrome.IsHitTestVisibleInChrome="True">
+                                        <TextBlock Foreground="White"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"
+                                                   Width="14" />
+                                    </Button>
+
+                                    <Button Grid.Column="3"
+                                            Command="{Binding DataContext.MaximizeCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Style="{StaticResource TitlebarMaximizeButton}"
+                                            shell:WindowChrome.IsHitTestVisibleInChrome="True">
+                                        <TextBlock Foreground="White"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"
+                                                   Width="14" />
+                                    </Button>
+
+                                    <Button Grid.Column="4"
+                                            Command="{Binding DataContext.ToggleFrontBehindCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Style="{StaticResource TitlebarToggleFrontBehindButton}"
+                                            shell:WindowChrome.IsHitTestVisibleInChrome="True">
+                                        <TextBlock Foreground="White"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"
+                                                   Width="14" />
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <!-- WindowChrome: the correct attached property usage -->
     <shell:WindowChrome.WindowChrome>
-        <shell:WindowChrome CaptionHeight="28"
-                        CornerRadius="0"
-                        GlassFrameThickness="0"
-                        NonClientFrameEdges="None"
-                        ResizeBorderThickness="6" />
+        <shell:WindowChrome ResizeBorderThickness="{Binding ResizeBorderThickness}"
+                            CaptionHeight="{Binding TitleHeight}"
+                            CornerRadius="0"
+                            GlassFrameThickness="0" />
     </shell:WindowChrome.WindowChrome>
-    
+
     <Grid>
-        <!-- Title bar -->
-        <Border Background="{StaticResource WB.Brush.BlueTitle}" Height="28" VerticalAlignment="Top">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="36"/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="120"/>
-                </Grid.ColumnDefinitions>
-
-                <!-- App icon (drag to move) -->
-                <Border Grid.Column="0" Background="{StaticResource WB.Brush.BlueTitle}">
-                    <Grid MouseLeftButtonDown="TitleBar_MouseLeftButtonDown" Margin="0,0,0,0">
-                        <TextBlock Text="●" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                    </Grid>
-                </Border>
-
-                <!-- Title text (drag to move) -->
-                <Border Grid.Column="1" Background="{StaticResource WB.Brush.BlueTitle}">
-                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Title}"
-                     VerticalAlignment="Center" Margin="6,0,0,0"
-                     Foreground="White" FontFamily="{StaticResource WB.AmigaTopaz}"
-                     FontSize="13" FontWeight="Bold"/>
-                </Border>
-
-                <!-- Gadgets (right) -->
-                <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,6,0">
-                    <!-- Depth/Minimize -->
-                    <Button Width="18" Height="18" ToolTip="Depth (Minimize)" Click="Minimize_Click"
-                  Background="{StaticResource WB.Brush.LightGray}">
-                        <Grid>
-                            <Border BorderBrush="{StaticResource WB.Brush.White}" BorderThickness="1"/>
-                            <Border BorderBrush="{StaticResource WB.Brush.DarkGray}" BorderThickness="0,0,1,1"/>
-                            <Rectangle Height="3" VerticalAlignment="Bottom" Margin="3" Fill="{StaticResource WB.Brush.Black}"/>
-                        </Grid>
-                    </Button>
-
-                    <!-- Zoom/Maximize -->
-                    <Button Width="18" Height="18" ToolTip="Zoom (Maximize/Restore)" Click="MaximizeRestore_Click"
-                  Background="{StaticResource WB.Brush.LightGray}">
-                        <Grid>
-                            <Border BorderBrush="{StaticResource WB.Brush.White}" BorderThickness="1"/>
-                            <Border BorderBrush="{StaticResource WB.Brush.DarkGray}" BorderThickness="0,0,1,1"/>
-                            <Rectangle Margin="3" StrokeThickness="2" Stroke="{StaticResource WB.Brush.Black}" Fill="{x:Null}"/>
-                        </Grid>
-                    </Button>
-
-                    <!-- Close -->
-                    <Button Width="18" Height="18" ToolTip="Close" Click="Close_Click"
-                  Background="{StaticResource WB.Brush.LightGray}">
-                        <Grid>
-                            <Border BorderBrush="{StaticResource WB.Brush.White}" BorderThickness="1"/>
-                            <Border BorderBrush="{StaticResource WB.Brush.DarkGray}" BorderThickness="0,0,1,1"/>
-                            <Path Stroke="{StaticResource WB.Brush.Black}" StrokeThickness="2" Data="M4,4 L14,14 M14,4 L4,14"/>
-                        </Grid>
-                    </Button>
-                </StackPanel>
-            </Grid>
-        </Border>
-
-        <!-- Content area with a subtle beveled frame -->
-        <Border Margin="6,34,6,6" Background="{StaticResource WB.Brush.WindowGray}">
-            <Border BorderBrush="{StaticResource WB.Brush.White}" BorderThickness="2">
-                <Border BorderBrush="{StaticResource WB.Brush.DarkGray}" BorderThickness="0,0,2,2">
-                    <Grid x:Name="PART_ContentHost" Background="{StaticResource WB.Brush.LightGray}">
-                        <ContentPresenter/>
-                    </Grid>
-                </Border>
-            </Border>
-        </Border>
+        <!--<Grid.ColumnDefinitions>
+            <ColumnDefinition Width="139*"/>
+            <ColumnDefinition Width="361*"/>
+        </Grid.ColumnDefinitions>-->
+        <Label Grid.ColumnSpan="2">asd</Label>
     </Grid>
 </Window>

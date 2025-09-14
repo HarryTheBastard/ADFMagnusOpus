@@ -10,7 +10,8 @@
         <Setter Property="FontFamily" Value="{StaticResource WB.AmigaTopaz}" />
         <Setter Property="FontSize" Value="{StaticResource WB.FontSize}"/>
     </Style>
-    
+
+    <!-- Base -->
     <Style x:Key="WB.Button" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}">
         <Setter Property="Foreground" Value="{StaticResource WB.Brush.Black}"/>
         <Setter Property="Background" Value="{StaticResource WB.Brush.LightGray}"/>
@@ -32,7 +33,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{StaticResource WB.Brush.Black}"/>
+                            <Setter Property="Background" Value="{StaticResource WB.Brush.BlueTitle}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground" Value="{StaticResource WB.Brush.DarkGray}"/>
@@ -63,14 +64,22 @@
 
     <!-- Implicit styles -->
     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}" />
-    <Style TargetType="{x:Type Button}"   BasedOn="{StaticResource WB.Button}" />
-    <Style TargetType="{x:Type TextBox}"  BasedOn="{StaticResource WB.TextBox}" />
-    <Style TargetType="{x:Type Menu}"     BasedOn="{StaticResource WB.Menu}" />
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource WB.Button}" />
+    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource WB.TextBox}" />
+    <Style TargetType="{x:Type Menu}" BasedOn="{StaticResource WB.Menu}" />
     <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource WB.MenuItem}" />
     <Style TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource BaseStyle}" />
     <Style TargetType="{x:Type ListView}" BasedOn="{StaticResource BaseStyle}" />
     <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource BaseStyle}" />
     <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource BaseStyle}" />
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="HeaderText" BasedOn="{StaticResource BaseTextBlockStyle}" >
+        <Setter Property="Foreground" Value="{StaticResource WB.Brush.Black}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0 4" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
 
 </ResourceDictionary>
     

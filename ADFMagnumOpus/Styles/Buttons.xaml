@@ -1,0 +1,201 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:styles="clr-namespace:ADFMagnumOpus.Styles">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Styles/WorkbenchColors.xaml"/>
+        <ResourceDictionary Source="/Styles/WorkbenchStyles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Base -->
+    <Style x:Key="TitlebarButtonBase" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="Background" Value="{StaticResource WB.Brush.BlueTitle}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="Root" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                        <!-- Bevel -->
+                        <Border x:Name="TopLeft" BorderBrush="{StaticResource WB.Brush.White}" BorderThickness="2,2,0,0">
+                            <Border x:Name="BottomRight" BorderBrush="{StaticResource WB.Brush.Black}" BorderThickness="0,0,2,2">
+                                <Grid>
+                                    <!-- Close: white square with black stroke -->
+                                    <Rectangle x:Name="Glyph_Close" Width="8" Height="10"
+                                               Fill="{StaticResource WB.Brush.White}" Stroke="{StaticResource WB.Brush.Black}"
+                                               StrokeThickness="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                               Visibility="Collapsed"/>
+
+                                    <!-- Minimize: black bar -->
+                                    <Rectangle x:Name="Glyph_Min" Width="10" Height="2"
+                                               Fill="{StaticResource WB.Brush.Black}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                                               Visibility="Collapsed"/>
+
+                                    <!-- Maximize: black outlined square -->
+                                    <Rectangle x:Name="Glyph_Max" Width="10" Height="10"
+                                               Fill="{x:Null}" Stroke="{StaticResource WB.Brush.Black}" StrokeThickness="2"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                                               Visibility="Collapsed"/>
+
+                                    <!-- Restore: two offset squares -->
+                                    <Grid x:Name="Glyph_Restore" Width="12" Height="12" Visibility="Collapsed"
+                                          HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Rectangle Width="10" Height="10" Stroke="{StaticResource WB.Brush.Black}" StrokeThickness="2"
+                                                   HorizontalAlignment="Right" VerticalAlignment="Bottom" Fill="{x:Null}"/>
+                                        <Rectangle Width="10" Height="10" Stroke="{StaticResource WB.Brush.Black}" StrokeThickness="2"
+                                                   HorizontalAlignment="Left"  VerticalAlignment="Top"    Fill="{x:Null}" Margin="2,2,0,0"/>
+                                    </Grid>
+
+                                    <!-- Optional content -->
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"
+                                                      Margin="{TemplateBinding Padding}"/>
+                                </Grid>
+                            </Border>
+                        </Border>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <!-- Pressed bevel flip -->
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="TopLeft"    Property="BorderBrush" Value="{StaticResource WB.Brush.Black}"/>
+                            <Setter TargetName="BottomRight" Property="BorderBrush" Value="{StaticResource WB.Brush.White}"/>
+                            <Setter TargetName="Glyph_Close" Property="Fill" Value="{StaticResource WB.Brush.LightGray}"/>
+                        </Trigger>
+
+                        <!-- Show glyph based on attached property -->
+                        <Trigger Property="styles:ButtonGlyphHelper.Glyph" Value="{x:Static styles:ButtonGlyph.Close}">
+                            <Setter TargetName="Glyph_Close" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="styles:ButtonGlyphHelper.Glyph" Value="{x:Static styles:ButtonGlyph.Minimize}">
+                            <Setter TargetName="Glyph_Min" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="styles:ButtonGlyphHelper.Glyph" Value="{x:Static styles:ButtonGlyph.Maximize}">
+                            <Setter TargetName="Glyph_Max" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="styles:ButtonGlyphHelper.Glyph" Value="{x:Static styles:ButtonGlyph.ToggleFrontBehind}">
+                            <Setter TargetName="Glyph_Restore" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+
+                        <!-- Disabled -->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource WB.Brush.DarkGray}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- All inherit the same template; only set the glyph + sizing -->
+    <Style x:Key="TitlebarCloseButton" TargetType="{x:Type Button}" BasedOn="{StaticResource TitlebarButtonBase}">
+        <Setter Property="styles:ButtonGlyphHelper.Glyph" Value="{x:Static styles:ButtonGlyph.Close}"/>
+        <Setter Property="Padding" Value="10"/>
+    </Style>
+
+    <Style x:Key="TitlebarMinimizeButton" TargetType="{x:Type Button}" BasedOn="{StaticResource TitlebarButtonBase}">
+        <Setter Property="styles:ButtonGlyphHelper.Glyph" Value="{x:Static styles:ButtonGlyph.Minimize}"/>
+        <Setter Property="Padding" Value="10"/>
+    </Style>
+
+    <Style x:Key="TitlebarMaximizeButton" TargetType="{x:Type Button}" BasedOn="{StaticResource TitlebarButtonBase}">
+        <Setter Property="styles:ButtonGlyphHelper.Glyph" Value="{x:Static styles:ButtonGlyph.Maximize}"/>
+        <Setter Property="Padding" Value="10"/>
+    </Style>
+
+    <Style x:Key="TitlebarToggleFrontBehindButton" TargetType="{x:Type Button}" BasedOn="{StaticResource TitlebarButtonBase}">
+        <Setter Property="styles:ButtonGlyphHelper.Glyph" Value="{x:Static styles:ButtonGlyph.ToggleFrontBehind}"/>
+        <Setter Property="Padding" Value="10"/>
+    </Style>
+
+
+
+    <!--<Style x:Key="Hoverless" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{StaticResource WB.Brush.BlueTitle}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="Root" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                        --><!-- Bevel: normal = white TL, black RB --><!--
+                        <Border x:Name="TopLeft"
+                                BorderBrush="{StaticResource WB.Brush.White}"
+                                BorderThickness="2,2,0,0">
+                            <Border x:Name="BottomRight"
+                                    BorderBrush="{StaticResource WB.Brush.Black}"
+                                    BorderThickness="0,0,2,2">
+                                <Grid>
+                                    --><!-- Center square --><!--
+                                    <Rectangle x:Name="InnerSquare"
+                                               Width="8" Height="10"
+                                               Fill="{StaticResource WB.Brush.White}"
+                                               Stroke="{StaticResource WB.Brush.Black}"
+                                               StrokeThickness="2"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Visibility="Collapsed" />
+
+                                    --><!-- Button content if needed --><!--
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"
+                                                      Margin="{TemplateBinding Padding}"
+                                                      RecognizesAccessKey="True"/>
+                                </Grid>
+                            </Border>
+                        </Border>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Tag" Value="ShowInnerSquare">
+                            <Setter TargetName="InnerSquare" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        
+                        --><!-- Pressed: swap bevel colors + change square --><!--
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="TopLeft" Property="BorderBrush" Value="{StaticResource WB.Brush.Black}"/>
+                            <Setter TargetName="BottomRight" Property="BorderBrush" Value="{StaticResource WB.Brush.White}"/>
+                            <Setter TargetName="InnerSquare" Property="Fill" Value="{StaticResource WB.Brush.LightGray}"/>
+                        </Trigger>
+
+                        --><!-- Disabled look --><!--
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource WB.Brush.DarkGray}"/>
+                            <Setter TargetName="InnerSquare" Property="Fill" Value="{StaticResource WB.Brush.DarkGray}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    --><!-- Window Close Button --><!--
+    <Style TargetType="{x:Type Button}" x:Key="WindowCloseButton" BasedOn="{StaticResource Hoverless}">
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="Tag" Value="ShowInnerSquare"/>
+    </Style>
+
+    --><!-- Window Minimize Button --><!--
+    <Style TargetType="{x:Type Button}" x:Key="WindowMinimizeButton" BasedOn="{StaticResource Hoverless}">
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="Tag" Value="ShowMinimize"/>
+    </Style>
+
+    --><!-- Window Maximize Button --><!--
+    <Style TargetType="{x:Type Button}" x:Key="WindowMaximizeButton" BasedOn="{StaticResource Hoverless}">
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="Tag" Value="ShowMaximize"/>
+    </Style>
+
+    --><!-- Window Toggle Front / Back Button --><!--
+    <Style TargetType="{x:Type Button}" x:Key="WindowToggleFrontBackButton" BasedOn="{StaticResource Hoverless}">
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="Tag" Value="ShowToggleFrontBack"/>
+    </Style>-->
+    
+</ResourceDictionary>
