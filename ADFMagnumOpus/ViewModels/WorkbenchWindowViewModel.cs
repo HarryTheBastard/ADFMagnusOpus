@@ -10,6 +10,8 @@ public partial class WorkbenchWindowViewModel : ObservableObject
 {
     private readonly WorkbenchWindow _window = null!;
 
+    public WorkbenchViewModel Workbench { get; } = new();
+
     public WorkbenchWindowViewModel()
     {
          

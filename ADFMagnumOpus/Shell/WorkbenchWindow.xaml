@@ -200,7 +200,7 @@
 
 
     <Window.DataContext>
-        <vm:WorkbenchViewModel />
+        <vm:WorkbenchWindowViewModel />
     </Window.DataContext>
 
     <Grid>

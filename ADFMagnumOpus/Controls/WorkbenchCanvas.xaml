@@ -9,7 +9,7 @@
              d:DesignHeight="400" d:DesignWidth="600">
     <Grid Background="#2D2D2D">
         <!-- replace with your Workbench background brush -->
-        <ItemsControl ItemsSource="{Binding Icons}">
+        <ItemsControl ItemsSource="{Binding Workbench.Icons}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas />
