@@ -17,8 +17,8 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border x:Name="Root" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
                         <!-- Bevel -->
-                        <Border x:Name="TopLeft" BorderBrush="{StaticResource WB.Brush.White}" BorderThickness="2,2,0,0">
-                            <Border x:Name="BottomRight" BorderBrush="{StaticResource WB.Brush.Black}" BorderThickness="0,0,2,2">
+                        <Border x:Name="TopLeft" BorderBrush="{StaticResource WB.Brush.Black}" BorderThickness="0,0,2,2">
+                            <Border x:Name="BottomRight" BorderBrush="{StaticResource WB.Brush.White}" BorderThickness="2,2,0,0">
                                 <Grid>
                                     <!-- Close: white square with black stroke -->
                                     <Rectangle x:Name="Glyph_Close" Width="8" Height="10"
@@ -38,13 +38,13 @@
                                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                                Visibility="Collapsed"/>
 
-                                    <!-- Restore: two offset squares -->
+                                    <!-- Toggle Front / Back: two offset squares -->
                                     <Grid x:Name="Glyph_Restore" Width="12" Height="12" Visibility="Collapsed"
                                           HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <Rectangle Width="10" Height="10" Stroke="{StaticResource WB.Brush.Black}" StrokeThickness="2"
                                                    HorizontalAlignment="Right" VerticalAlignment="Bottom" Fill="{x:Null}"/>
                                         <Rectangle Width="10" Height="10" Stroke="{StaticResource WB.Brush.Black}" StrokeThickness="2"
-                                                   HorizontalAlignment="Left"  VerticalAlignment="Top"    Fill="{x:Null}" Margin="2,2,0,0"/>
+                                                   HorizontalAlignment="Left" VerticalAlignment="Top" Fill="{x:Null}" Margin="2,2,0,0"/>
                                     </Grid>
 
                                     <!-- Optional content -->

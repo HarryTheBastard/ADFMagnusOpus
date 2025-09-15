@@ -22,12 +22,6 @@ namespace ADFMagnumOpus.Shell
             else DragMove();
         }
 
-        private void Minimize_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
-        private void MaximizeRestore_Click(object sender, RoutedEventArgs e) => ToggleMaxRestore();
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void ToggleMaxRestore() =>
             WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
