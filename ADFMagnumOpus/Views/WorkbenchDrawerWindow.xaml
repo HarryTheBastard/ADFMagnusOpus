@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="ADFMagnumOpus.Views.WorkbenchDrawerWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ADFMagnumOpus.Views"
+             >
+    <Border Background="{StaticResource WB.Brush.WindowGray}">
+        <!-- Outer Workbench bevel -->
+        <Border BorderBrush="{StaticResource WB.Brush.White}" BorderThickness="2,2,0,0">
+            <Border BorderBrush="{StaticResource WB.Brush.Black}" BorderThickness="0,0,2,2">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="28"/>
+                        <!-- title bar height -->
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- TITLE BAR (blue) -->
+                    <Grid Grid.Row="0" Background="{StaticResource WB.Brush.BlueTitle}"
+                          MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
+                          MouseLeftButtonUp="TitleBar_MouseLeftButtonUp"
+                          MouseMove="TitleBar_MouseMove">
+                        <Grid.ColumnDefinitions>
+                            <!-- Close -->
+                            <ColumnDefinition Width="Auto"/>
+
+                            <!-- Title -->
+                            <ColumnDefinition Width="*"/>
+
+                            <!-- Toggle -->
+                            <ColumnDefinition Width="Auto"/>
+                            
+                        </Grid.ColumnDefinitions>
+
+                        <!-- keep white left + top, and full-width black bottom -->
+                        <Rectangle Fill="{StaticResource WB.Brush.White}"
+                                   Width="2" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
+                        <Rectangle Fill="{StaticResource WB.Brush.White}"
+                                   Height="2" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                        <Rectangle Fill="{StaticResource WB.Brush.Black}"
+                                   Height="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+
+                        <!-- Close -->
+                        <Button Grid.Column="0"
+                                Style="{StaticResource TitlebarCloseButton}"
+                                Command="{Binding CloseCommand, ElementName=root}"/>
+
+                        <!-- Title -->
+                        <TextBlock Grid.Column="1"
+                                   Text="{Binding Title, ElementName=root}"
+                                   Style="{StaticResource HeaderText}"
+                                   Foreground="White"
+                                   VerticalAlignment="Center"
+                                   Margin="6,0,6,0"/>
+
+                        <!-- Toggle front/back -->
+                        <Button Grid.Column="2"
+                                Style="{StaticResource TitlebarToggleFrontBehindButton}"
+                                Command="{Binding ToggleZOrderCommand, ElementName=root}" />
+                    </Grid>
+
+                    <!-- CONTENT with ScrollViewer (arrows visible) -->
+                    <ScrollViewer Grid.Row="1"
+                                  VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Auto"
+                                  Padding="6">
+                        <ContentPresenter Content="{Binding Content, ElementName=root}"/>
+                    </ScrollViewer>
+                </Grid>
+
+            </Border>
+        </Border>
+    </Border>
+</UserControl>

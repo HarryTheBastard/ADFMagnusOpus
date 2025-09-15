@@ -9,6 +9,7 @@ namespace ADFMagnumOpus
         //{
         //    base.OnStartup(e);
         //    var win = new MainWindow();
+        //    win.Content = new MainView();
         //    win.Show();
         //}
     }
