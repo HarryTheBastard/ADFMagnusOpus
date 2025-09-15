@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace ADFMagnumOpus.Controls;
 
@@ -10,53 +12,38 @@ namespace ADFMagnumOpus.Controls;
 public partial class FileIcon : UserControl
 {
     private bool _isDragging;
-    private Point _dragStart;
-
+    private Point _startPoint;
 
     public FileIcon()
     {
         InitializeComponent();
 
-        Loaded += OnLoaded;
         MouseLeftButtonDown += OnMouseLeftButtonDown;
         MouseMove += OnMouseMove;
         MouseLeftButtonUp += OnMouseLeftButtonUp;
-
     }
-
-
-    private void OnLoaded(object sender, RoutedEventArgs e)
-    {
-        // Ensure the icon is focusable for keyboard later if needed
-        Focusable = true;
-    }
-
 
     private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         _isDragging = true;
-        _dragStart = e.GetPosition(null);
+        _startPoint = e.GetPosition(null);
         CaptureMouse();
         e.Handled = true;
     }
 
-
     private void OnMouseMove(object sender, MouseEventArgs e)
     {
         if (!_isDragging) return;
-        if (DataContext is not Models.DiskImageBase vm) return;
-
+        if (DataContext is not ADFMagnumOpus.Models.DiskImageBase vm) return;
 
         var canvas = FindCanvasAncestor(this);
-        if (canvas is null) return;
-
+        if (canvas == null) return;
 
         var pos = e.GetPosition(canvas);
-        // Center drag around pointer by offsetting half the icon size if desired; here we align top-left to pointer
-        vm.Left = pos.X - 32; // tweak if you change icon size
-        vm.Top = pos.Y - 32;
+        vm.Left = pos.X - (ActualWidth / 2);
+        vm.Top = pos.Y - (ActualHeight / 2);
+        Debug.WriteLine($"{vm.Left}, {vm.Top}");
     }
-
 
     private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
@@ -66,13 +53,12 @@ public partial class FileIcon : UserControl
         e.Handled = true;
     }
 
-
     private static Canvas? FindCanvasAncestor(DependencyObject current)
     {
         while (current != null)
         {
             if (current is Canvas c) return c;
-            current = System.Windows.Media.VisualTreeHelper.GetParent(current);
+            current = VisualTreeHelper.GetParent(current);
         }
         return null;
     }
