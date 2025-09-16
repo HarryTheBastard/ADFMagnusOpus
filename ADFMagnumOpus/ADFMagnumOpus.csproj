@@ -11,6 +11,9 @@
 
   <ItemGroup>
     <None Remove="Assets\Icons\disk.png" />
+    <None Remove="Assets\Icons\disk_inverted.png" />
+    <None Remove="Assets\Icons\drawer.png" />
+    <None Remove="Assets\Icons\drawer_open.png" />
     <None Remove="Fonts\amiga-topaz.ttf" />
   </ItemGroup>
 
@@ -18,6 +21,9 @@
     <Resource Include="Assets\Icons\disk.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\Icons\disk_inverted.png" />
+    <Resource Include="Assets\Icons\drawer.png" />
+    <Resource Include="Assets\Icons\drawer_open.png" />
   </ItemGroup>
 
   <ItemGroup>

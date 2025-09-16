@@ -1,4 +1,5 @@
-﻿using ADFMagnumOpus.Shell;
+﻿using ADFMagnumOpus.Models;
+using ADFMagnumOpus.Shell;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Windows;
@@ -83,6 +84,29 @@ public partial class WorkbenchWindowViewModel : ObservableObject
     public void OnOpenDisk()
     {
 
+    }
+
+    [RelayCommand]
+    public void OnCloseDisk()
+    {
+
+    }
+
+    private bool CanCloseDisk(IWorkbenchItem? item)
+    {
+        // If you have a specific disk type or flag, use it here:
+        // return item is DiskItem vm && vm.IsMounted;
+        // Fallback: treat anything with a VolumeName as a disk:
+        return item != null && !string.IsNullOrWhiteSpace(item.VolumeName);
+    }
+
+    private void OnCloseDisk(IWorkbenchItem? item)
+    {
+        if (item == null) return;
+
+        // Remove icon from the desktop (or run your unmount logic first)
+        // Assuming Workbench.Icons is an ObservableCollection<IWorkbenchItem>
+        Workbench?.Icons?.Remove(item);
     }
 
 

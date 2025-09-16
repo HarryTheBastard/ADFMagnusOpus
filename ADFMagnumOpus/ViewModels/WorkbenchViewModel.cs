@@ -17,6 +17,11 @@ public partial class WorkbenchViewModel : ObservableObject
         // For now, instantiate one of each (you asked to just create one; feel free to comment one out)
         Icons.Add(new AdfImage("Workbench 2.1", LoadPackIcon("Assets/Icons/disk.png"))
         {
+            Left = 200,
+            Top = 48
+        });
+        Icons.Add(new OpusApplication("Applications", LoadPackIcon("Assets/Icons/drawer.png"))
+        {
             Left = 48,
             Top = 48
         });

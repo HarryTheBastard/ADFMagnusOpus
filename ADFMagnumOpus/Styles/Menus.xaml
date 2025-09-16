@@ -45,13 +45,13 @@
         <Setter Property="FontSize" Value="{DynamicResource WB.Menu.FontSize}"/>
         <!-- keep this so commands bind to your VM -->
         <Setter Property="DataContext"
-            Value="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}"/>
+                Value="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ContextMenu">
                     <Border Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
                         <StackPanel IsItemsHost="True" Margin="2"/>
                     </Border>
                 </ControlTemplate>
@@ -62,11 +62,21 @@
     <!-- The Workbench Canvas context menu -->
     <ContextMenu x:Key="WorkbenchCanvasMenu" Style="{StaticResource AmigaContextMenuStyle}">
         <MenuItem Header="Create Disk..."
-              Style="{StaticResource AmigaMenuItemStyle}"
-              Command="{Binding CreateDiskCommand}"/>
+                  Style="{StaticResource AmigaMenuItemStyle}"
+                  Command="{Binding CreateDiskCommand}"/>
         <MenuItem Header="Open Disk..."
-              Style="{StaticResource AmigaMenuItemStyle}"
-              Command="{Binding OpenDiskCommand}"/>
+                  Style="{StaticResource AmigaMenuItemStyle}"
+                  Command="{Binding OpenDiskCommand}"/>
+    </ContextMenu>
+
+    <ContextMenu x:Key="WorkbenchDiskIconMenu"
+                 Style="{StaticResource AmigaContextMenuStyle}"
+                 DataContext="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+                    <!-- Rebind DataContext to the Window VM via the icon’s Tag (set in step 3) -->
+        <MenuItem Header="Close"
+                  Style="{StaticResource AmigaMenuItemStyle}"
+                  Command="{Binding CloseDiskCommand}"
+                  CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
     </ContextMenu>
 
 </ResourceDictionary>

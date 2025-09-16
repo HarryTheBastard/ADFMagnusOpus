@@ -8,5 +8,6 @@ public interface IWorkbenchItem : INotifyPropertyChanged
     string VolumeName { get; }
     string? FilePath { get; }
     ImageSource IconSource { get; }
+    bool IsDisk { get; }
 
 }

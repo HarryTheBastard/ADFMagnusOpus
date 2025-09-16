@@ -34,6 +34,11 @@
                 <Style TargetType="ContentPresenter">
                     <Setter Property="Canvas.Left" Value="{Binding Left}" />
                     <Setter Property="Canvas.Top" Value="{Binding Top}" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsDisk}" Value="True">
+                            <Setter Property="ContextMenu" Value="{StaticResource WorkbenchDiskIconMenu}"/>
+                        </DataTrigger>
+                    </Style.Triggers>
                 </Style>
             </ItemsControl.ItemContainerStyle>
 

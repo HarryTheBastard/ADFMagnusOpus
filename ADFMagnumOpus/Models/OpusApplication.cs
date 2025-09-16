@@ -2,9 +2,11 @@
 
 namespace ADFMagnumOpus.Models;
 
-public class BatchConverter : WorkbenchItem, IWorkbenchItem
+public class OpusApplication : WorkbenchItem, IWorkbenchItem
 {
-    public BatchConverter(string volumeName, ImageSource icon)
+    public override bool IsDisk => false;
+
+    public OpusApplication(string volumeName, ImageSource icon)
     {
         Initialize(volumeName, icon);
 

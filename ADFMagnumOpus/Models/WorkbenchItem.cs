@@ -36,6 +36,8 @@ public class WorkbenchItem : IWorkbenchItem
         protected set { if (_iconSource != value) { _iconSource = value; OnPropertyChanged(); } }
     }
 
+    public virtual bool IsDisk => true;
+
     public double Left
     {
         get => _left;
@@ -58,7 +60,7 @@ public class WorkbenchItem : IWorkbenchItem
     {
         get => _height;
         set { if (_height != value) { _height = value; OnPropertyChanged(); } }
-    }
+    }    
 
     // Helper to set name/icon quickly in derived types
     protected void Initialize(string volumeName, ImageSource icon, string? filePath = null,
