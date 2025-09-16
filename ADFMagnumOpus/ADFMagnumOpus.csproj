@@ -18,15 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\Icons\disk.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\Icons\disk_inverted.png" />
-    <Resource Include="Assets\Icons\drawer.png" />
-    <Resource Include="Assets\Icons\drawer_open.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="Fonts\amiga-topaz.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
