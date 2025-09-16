@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
         xmlns:vm="clr-namespace:ADFMagnumOpus.ViewModels"
+        xmlns:controls="clr-namespace:ADFMagnumOpus.Controls"
         xmlns:local="clr-namespace:ADFMagnumOpus.Shell"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=vm:WorkbenchWindowViewModel, IsDesignTimeCreatable=True}"
@@ -196,6 +197,15 @@
         </Grid.ColumnDefinitions>--><!--
         <Label Grid.ColumnSpan="2">asd</Label>
     </Grid>-->
-    
-    
+
+
+    <Window.DataContext>
+        <vm:WorkbenchWindowViewModel />
+    </Window.DataContext>
+
+    <Grid>
+        <!-- Main Workbench area -->
+        <controls:WorkbenchCanvas />
+    </Grid>
+
 </Window>

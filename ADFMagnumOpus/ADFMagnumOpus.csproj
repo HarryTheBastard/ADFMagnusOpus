@@ -10,11 +10,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Icons\disk.png" />
     <None Remove="Fonts\amiga-topaz.ttf" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Fonts\amiga-topaz.ttf" />
+    <Resource Include="Assets\Icons\disk.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Fonts\amiga-topaz.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
