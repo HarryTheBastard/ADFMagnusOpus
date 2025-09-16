@@ -29,4 +29,7 @@
 
     <sys:Boolean x:Key="WB.UseDitheredTitle">False</sys:Boolean>
 
+    <sys:Double x:Key="WB.Menu.FontSize">16</sys:Double>
+    <Thickness x:Key="WB.Menu.ItemPadding">16,10</Thickness>
+
 </ResourceDictionary>

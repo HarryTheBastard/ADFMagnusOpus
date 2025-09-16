@@ -1,0 +1,72 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Amiga-like MenuItem style -->
+    <!-- Amiga-like MenuItem style -->
+    <Style x:Key="AmigaMenuItemStyle" TargetType="MenuItem">
+        <Setter Property="FontSize" Value="{DynamicResource WB.Menu.FontSize}"/>
+        <Setter Property="Padding" Value="{DynamicResource WB.Menu.ItemPadding}"/>
+        <Setter Property="MinHeight" Value="28"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuItem">
+                    <Border x:Name="Bd" Background="Transparent">
+                        <Grid Margin="0">
+                            <ContentPresenter
+                            ContentSource="Header"
+                            RecognizesAccessKey="True"
+                            VerticalAlignment="Center" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource WB.Brush.BlueTitle}"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Amiga-like ContextMenu style -->
+    <Style x:Key="AmigaContextMenuStyle" TargetType="ContextMenu">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Background" Value="{StaticResource WB.Brush.WindowGray}"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="FontSize" Value="{DynamicResource WB.Menu.FontSize}"/>
+        <!-- keep this so commands bind to your VM -->
+        <Setter Property="DataContext"
+            Value="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContextMenu">
+                    <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <StackPanel IsItemsHost="True" Margin="2"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- The Workbench Canvas context menu -->
+    <ContextMenu x:Key="WorkbenchCanvasMenu" Style="{StaticResource AmigaContextMenuStyle}">
+        <MenuItem Header="Create Disk..."
+              Style="{StaticResource AmigaMenuItemStyle}"
+              Command="{Binding CreateDiskCommand}"/>
+        <MenuItem Header="Open Disk..."
+              Style="{StaticResource AmigaMenuItemStyle}"
+              Command="{Binding OpenDiskCommand}"/>
+    </ContextMenu>
+
+</ResourceDictionary>

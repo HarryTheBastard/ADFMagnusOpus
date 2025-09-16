@@ -32,7 +32,7 @@ public partial class WorkbenchWindowViewModel : ObservableObject
     public Thickness ResizeBorderThickness => new Thickness(ResizeBorder);
 
     /// <summary>
-    /// Height of the title bar / cpation of the window
+    /// Height of the title bar / caption of the window
     /// </summary>
     [ObservableProperty]
     private double _titleHeight = 28;
@@ -71,5 +71,19 @@ public partial class WorkbenchWindowViewModel : ObservableObject
 
     //    SystemCommands.ShowSystemMenu(_window, screenPos);
     //}
+
+
+    [RelayCommand]
+    public void OnCreateDisk()
+    {
+
+    }
+
+    [RelayCommand]
+    public void OnOpenDisk()
+    {
+
+    }
+
 
 }
